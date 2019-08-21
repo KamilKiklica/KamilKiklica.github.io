@@ -129,7 +129,7 @@ function listFiles() {
                 if (regex.test(file.name)) {
                     appendPre(file.name + ' (' + file.id + ')');
                     const p = document.createElement("a");
-                    p.href = 'https://drive.google.com/uc?id='+ file.id +'&export=download';
+                    p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     p.textContent = file.name;
                     document.querySelector('#content').appendChild(p);
                 }
