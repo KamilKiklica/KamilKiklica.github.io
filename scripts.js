@@ -115,7 +115,6 @@ function appendPre(message) {
 /**
  * Print files.
  */
-var testList = [];
 function listFiles() {
     gapi.client.drive.files.list({
         'pageSize': 100,
@@ -131,13 +130,10 @@ function listFiles() {
                     appendPre(file.name + ' (' + file.id + ')');
                     const p = document.createElement("a");
                     p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     p.textContent = file.name;
                     document.querySelector('#content').appendChild(p);
-                    testList.push(link);
                 }
             }
-            console.log(testList);
         } else {
             appendPre('No files found.');
         }
@@ -172,7 +168,6 @@ Http.onreadystatechange = (e) => {
 
 $(function()
 {
-
     var playerTrack = $("#player-track"),
         bgArtwork = $('#bg-artwork'),
         bgArtworkUrl, albumName = $('#album-name'),
@@ -192,7 +187,7 @@ $(function()
         trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'],
         albumArtworks = ['_1','_2','_3','_4','_5'],
         trackUrl = ['https://docs.google.com/uc?export=download&id=1Ukv210dD_6WIAZy5OHpE25JCPCLTlT6i','https://docs.google.com/uc?export=download&id=0B_aqptrxnrbmRkRMWVJEa0p5NjA','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
-        // trackUrl = testList;
+        playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
         console.log(trackUrl);
 
     function playPause()
