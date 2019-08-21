@@ -186,7 +186,7 @@ $(function()
         albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'],
         trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'],
         albumArtworks = ['_1','_2','_3','_4','_5'],
-        trackUrl = ['https://docs.google.com/uc?export=download&id=1Ukv210dD_6WIAZy5OHpE25JCPCLTlT6i','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
+        trackUrl = ['https://docs.google.com/uc?export=download&id=1Ukv210dD_6WIAZy5OHpE25JCPCLTlT6i','https://docs.google.com/uc?export=download&id=0B_aqptrxnrbmRkRMWVJEa0p5NjA','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
         playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
     function playPause()
