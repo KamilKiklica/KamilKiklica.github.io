@@ -145,30 +145,6 @@ function listFiles() {
 
 }
 
-function testinput(re, str){
-    if (re.test(str)) {
-        midstring = " zawiera ";
-    } else {
-        midstring = " nie zawiera ";
-    }
-    console.log(str + midstring + re.source);
-}
-
-function play(){
-    var audio = document.getElementById("audio");
-    audio.play();
-}
-
-const Http = new XMLHttpRequest();
-const url='https://www.googleapis.com/drive/v3/files/1Y53LmMajd0tkhvQhHz0WafGYQUZtAErY';
-Http.open("GET", url);
-// Http.send(null);
-
-Http.onreadystatechange = (e) => {
-    console.log(Http.responseText)
-}
-
-
 
 $(function()
 {
