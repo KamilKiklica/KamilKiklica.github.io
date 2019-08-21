@@ -33,7 +33,7 @@ function listFiles() {
                 var file = files[i];
                 var regex = new RegExp("\\w*.mp3$");
                 if (regex.test(file.name)) {
-                    appendPre(file.name + ' (' + file.id + ')');
+                    // appendPre(file.name + ' (' + file.id + ')');
                     const p = document.createElement("a");
                     p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     p.textContent = file.name;
