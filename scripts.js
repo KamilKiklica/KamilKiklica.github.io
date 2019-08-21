@@ -1,4 +1,7 @@
 
+// $(function(trackList)
+// {
+
 function onSuccess(googleUser) {
     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
 }
@@ -170,7 +173,7 @@ Http.onreadystatechange = (e) => {
 
 
 
-$(function()
+$(function(trackList)
 {
     var playerTrack = $("#player-track"),
         bgArtwork = $('#bg-artwork'),
