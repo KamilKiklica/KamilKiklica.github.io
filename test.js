@@ -37,9 +37,9 @@ function listFiles() {
                     const p = document.createElement("a");
                     p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     p.textContent = file.name;
-                    p.breakAfter;
                     document.querySelector('#content').appendChild(p);
-                    // appendPre('<br>');
+                    var br = document.createElement("br");
+                    document.querySelector('#content').appendChild(br);
                     var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     trackList.push(link);
                     namesList.push(file.name);
