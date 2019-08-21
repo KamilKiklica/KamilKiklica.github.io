@@ -396,6 +396,7 @@ $(function()
         playPreviousTrackButton.on('click',function(){ selectTrack(-1);} );
         playNextTrackButton.on('click',function(){ selectTrack(1);});
         console.log(trackList);
+        console.log(trackUrl);
 
     }
 
