@@ -33,6 +33,7 @@ function handleAuthClick(event) {
 function makeApiCall() {
     gapi.client.load('drive', 'v2', makeRequest);
 }
+/*wtf*/
 
 function makeRequest()
 {
