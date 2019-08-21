@@ -19,6 +19,8 @@ function appendPre(message) {
  */
 
 var trackList = [];
+var namesList = [];
+var artWorkList = [];
 function listFiles() {
     gapi.client.drive.files.list({
         'pageSize': 100,
@@ -38,6 +40,8 @@ function listFiles() {
                     document.querySelector('#content').appendChild(p);
                     var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     trackList.push(link);
+                    namesList.push(file.name);
+                    artWorkList.push('_1');
                 }
             }
         } else {
@@ -65,9 +69,12 @@ $(function()
         tProgress = $('#current-time'),
         tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0,
         buffInterval = null, tFlag = false,
-        albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'],
-        trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'],
-        albumArtworks = ['_1','_2','_3','_4','_5'],
+        // albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'],
+        albums = namesList,
+        // trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'],
+        trackNames = namesList,
+        // albumArtworks = ['_1','_2','_3','_4','_5'],
+        albumArtworks = artWorkList,
         // trackUrl = ["https://docs.google.com/uc?export=download&id=18xWOaZu6anuhwO0vuyGqi6eNIYqeKGJ9",'https://docs.google.com/uc?export=download&id=0B_aqptrxnrbmRkRMWVJEa0p5NjA','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
         trackUrl = trackList,
         playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
