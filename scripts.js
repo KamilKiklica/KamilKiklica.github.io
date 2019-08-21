@@ -80,6 +80,7 @@ function updateSigninStatus(isSignedIn) {
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
         listFiles();
+        console.log(trackList);
     } else {
         authorizeButton.style.display = 'block';
         signoutButton.style.display = 'none';
@@ -137,7 +138,7 @@ function listFiles() {
                     var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     trackList.push(link);
                 }
-            } console.log(trackList);
+            }
         } else {
             appendPre('No files found.');
         }
