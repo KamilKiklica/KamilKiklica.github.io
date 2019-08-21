@@ -137,7 +137,7 @@ function listFiles() {
                     var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     trackList.push(link);
                 }
-            }
+            } console.log(trackList);
         } else {
             appendPre('No files found.');
         }
