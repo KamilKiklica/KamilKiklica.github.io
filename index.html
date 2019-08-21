@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="scripts.js" defer></script>
-    <meta name="google-signin-client_id" content="342126350355-ii1j6dp3uv3llkqur635pmbvdn59huv0.apps.googleusercontent.com">
-
-
+    <title>Drive API Quickstart</title>
+    <meta charset="utf-8" />
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<p>Drive API Quickstart</p>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" style="display: none;">Authorize</button>
+<button id="signout_button" style="display: none;">Sign Out</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
+
 </body>
 </html>
