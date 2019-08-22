@@ -1,3 +1,10 @@
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -95,6 +102,7 @@ function listFiles() {
         'pageSize': 100,
         'fields': "nextPageToken, files(id, name)"
     }).then(function(response) {
+        const parentObjectt = document.querySelectorAll('.play-list-row');
         appendPre('Files:');
         var files = response.result.files;
         var temp = [];
@@ -106,166 +114,56 @@ function listFiles() {
                     temp.push(filee);
                 }
             }
-                for (var i = 0; i < temp.length; i++) {
+            for (var i = 0; i < temp.length; i++) {
                 var file = temp[i];
-                // var regex = new RegExp("\\w*.mp3$");
-                // if (regex.test(file.name)) {
-                    // appendPre(file.name + ' (' + file.id + ')');
-                    const p = document.createElement("a");
-                    p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    p.textContent = file.name;
-                    document.querySelector('#content').appendChild(p);
-                    var br = document.createElement("br");
-                    document.querySelector('#content').appendChild(br);
+                const p = document.createElement("a");
+                p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                p.textContent = file.name;
+                document.querySelector('#content').appendChild(p);
+                var br = document.createElement("br");
+                document.querySelector('#content').appendChild(br);
 
-                    const source = document.createElement("source");
-                    source.src = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    source.setAttribute('data-track-number', i+1);
-                    // var test = document.getElementsByTagName("audio");
-                    // test.appendChild(source);
-                    document.querySelector('#audio').appendChild(source);
+                const source = document.createElement("source");
+                source.src = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                source.setAttribute('data-track-number', parentObjectt.length+i+1);
+                // var test = document.getElementsByTagName("audio");
+                // test.appendChild(source);
+                document.querySelector('#audio').appendChild(source);
 
 
-                    const playListRow = document.createElement("div");
-                    playListRow.setAttribute('class', 'play-list-row');
-                    playListRow.setAttribute('data-track-row', i+1);
+                const playListRow = document.createElement("div");
+                playListRow.setAttribute('class', 'play-list-row');
+                playListRow.setAttribute('data-track-row', parentObjectt.length+i+1);
 
-                    // const smallToggleButton = document.createElement("div");
-                    // smallToggleButton.setAttribute('class', 'small-toggle-btn');
-                    //
-                    // const smallPlayButton = document.createElement("i");
-                    // smallPlayButton.setAttribute('class', 'small-play-btn');
-                    //
-                    // const screenReaderText = document.createElement("span");
-                    // screenReaderText.setAttribute('class', 'screen-reader-text');
-                    // screenReaderText.textContent = 'Small toggle button';
-                    //
-                    // const trackNumber = document.createElement("div");
-                    // trackNumber.setAttribute('class', 'track-number');
-                    // trackNumber.textContent = i+1+'.';
-                    //
-                    // const trackTitle = document.createElement("div");
-                    // trackTitle.setAttribute('class', 'track-title');
-                    //
-                    // const playListTrack = document.createElement("a");
-                    // playListTrack.setAttribute('class', 'playlist-track');
-                    // playListTrack.href = '#';
-                    // playListTrack.setAttribute('data-play-track', i.toString());
-                    // playListTrack.textContent = file.name;
+                document.querySelector('.play-list').appendChild(playListRow);
 
-                // debugger;
-                    document.querySelector('.play-list').appendChild(playListRow);
+                songsList.push('https://docs.google.com/uc?export=download&id='+ file.id);
 
-
-
-                    // document.querySelector('.play-list').appendChild(playListRow);
-                    //
-                    // document.querySelector('.play-list-row').appendChild(smallToggleButton);
-                    //
-                    // document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
-                    // document.querySelector('.small-play-btn').appendChild(screenReaderText);
-                    //
-                    // document.querySelector('.play-list-row').appendChild(trackNumber);
-                    // document.querySelector('.play-list-row').appendChild(trackTitle);
-                    // document.querySelector('.track-title').appendChild(playListTrack);
-                    songsList.push('https://docs.google.com/uc?export=download&id='+ file.id);
-
-
-                // }
             }
             console.log(songsList);
 
+            const parentObject = document.querySelectorAll('.play-list-row');
 
-
-
-
-
-            const smallToggleButton = document.createElement("div");
-            smallToggleButton.setAttribute('class', 'small-toggle-btn');
-
-            const smallPlayButton = document.createElement("i");
-            smallPlayButton.setAttribute('class', 'small-play-btn');
-
-            const screenReaderText = document.createElement("span");
-            screenReaderText.setAttribute('class', 'screen-reader-text');
-            screenReaderText.textContent = 'Small toggle button';
-
-            const trackNumber = document.createElement("div");
-            trackNumber.setAttribute('class', 'track-number');
-// trackNumber.textContent = i+1+'.';
-
-            const trackTitle = document.createElement("div");
-            trackTitle.setAttribute('class', 'track-title');
-
-// const playListTrack = document.createElement("a");
-// playListTrack.setAttribute('class', 'playlist-track');
-// playListTrack.href = '#';
-// playListTrack.setAttribute('data-play-track', i.toString());
-// playListTrack.textContent = file.name;
-
-
-            // const parentObject = document.getElementsByClassName('play-list-row');
-
-const parentObject = document.querySelectorAll('.play-list-row');
-
-let nodeItem;
-for (let i = 0; i < parentObject.length; i++) {
-    nodeItem = parentObject.item(i);
-    let number = i+1;
-    nodeItem.innerHTML = `<div class="small-toggle-btn">
-                <i class="small-play-btn">
-                    <span class="screen-reader-text">Small toggle button</span>
-                </i>
-            </div>
-            <div class="track-number">
-                `+number+`.
-            </div>
-            <div class="track-title">
-                <a class="playlist-track" href="#" data-play-track=`+number+`>`+temp[i].name+`</a>
-            </div>`;
-}
-
-
-
-            // document.querySelector('.play-list-row').appendChild(smallToggleButton);
-            //
-            // document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
-            // document.querySelector('.small-play-btn').appendChild(screenReaderText);
-            //
-            // document.querySelector('.play-list-row').appendChild(trackNumber);
-            // document.querySelector('.play-list-row').appendChild(trackTitle);
-
-
-
-
-//
-// parentObject.forEach((parent, i) => {
-//     const childElement1 = document.createElement('.small-toggle-btn');
-//     const childElement2 = document.createElement('track-number');
-//     const childElement3 = document.createElement('track-title');
-//     childElement1.className = 'second';
-//     childElement1.innerHTML = `second ${i}`;
-//     parent.appendChild(childElement1);
-//     parent.appendChild(childElement2);
-//     parent.appendChild(childElement3)
-// });
-
-
-
-
-
-
-
-
-
-
-
+            let nodeItem;
+            for (let i = 0; i < parentObject.length; i++) {
+                nodeItem = parentObject.item(parentObjectt.length+i);
+                let number = parentObjectt.length+i+1;
+                nodeItem.innerHTML = `
+                    <div class="small-toggle-btn">
+                        <i class="small-play-btn">
+                            <span class="screen-reader-text">Small toggle button</span>
+                        </i>
+                    </div>
+                    <div class="track-number">`+number+`.</div>
+                    <div class="track-title">
+                        <a class="playlist-track" href="#" data-play-track=`+number+`>`+temp[i].name+`</a>
+                    </div>`;
+            }
 
         } else {
             appendPre('No files found.');
         }
     });
-
 }
 
 
