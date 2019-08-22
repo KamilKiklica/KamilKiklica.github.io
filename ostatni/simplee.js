@@ -3,6 +3,7 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
+    location.reload();
 }
 
 function onSignIn(googleUser) {
@@ -327,7 +328,7 @@ var audioPlayer = function() {
                     alert('An unknown error occurred.');
                     break;
             }
-            trackLoaded = false;
+            _trackLoaded = false;
             _resetPlayStatus();
         }, false);
 

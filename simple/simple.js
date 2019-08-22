@@ -429,7 +429,7 @@ var audioPlayer = function() {
                     alert('An unknown error occurred.');
                     break;
             }
-            trackLoaded = false;
+            _trackLoaded = false;
             _resetPlayStatus();
         }, false);
 
