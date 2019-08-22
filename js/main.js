@@ -118,10 +118,22 @@ function listFiles() {
                     document.querySelector('#content').appendChild(p);
                     var br = document.createElement("br");
                     document.querySelector('#content').appendChild(br);
-                    var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    trackList.push(link);
-                    namesList.push(file.name);
-                    artWorkList.push('_1');
+                    // var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                    // trackList.push(link);
+                    // namesList.push(file.name);
+                    // artWorkList.push('_1');
+
+
+                    const li = document.createElement("li");
+                    li.audiourl = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                    li.cover = "cover1.jpg";
+                    li.artist = file.name;
+                    li.textContent = file.name;
+                    document.querySelector(".playlist hidden").appendChild(li);
+
+
+
+
                 }
             }
         } else {
