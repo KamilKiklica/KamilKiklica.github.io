@@ -125,11 +125,15 @@ function listFiles() {
 
 
                     const li = document.createElement("li");
-                    li.audiourl = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    li.cover = "cover1.jpg";
-                    li.artist = file.name;
+                    // li.audiourl = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                    // li.cover = "cover1.jpg";
+                    // li.artist = file.name;
                     li.textContent = file.name;
-                    document.querySelector(".playlist hidden").appendChild(li);
+                    li.setAttribute('audiourl', 'https://docs.google.com/uc?export=download&id='+ file.id);
+                    li.setAttribute('cover', "cover1.jpg");
+                    li.setAttribute('artist', file.name);
+                    // li.setAttribute('textContent', file.name);
+                    document.querySelector(".playlist.hidden").appendChild(li);
 
 
 
