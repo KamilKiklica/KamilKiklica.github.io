@@ -104,7 +104,7 @@ function listFiles() {
         'fields': "nextPageToken, files(id, name)"
     }).then(function(response) {
         const parentObjectt = document.querySelectorAll('.play-list-row');
-        appendPre('Files:');
+        // appendPre('Files:');
         var files = response.result.files;
         var temp = [];
         if (files && files.length > 0) {
@@ -117,12 +117,12 @@ function listFiles() {
             }
             for (var i = 0; i < temp.length; i++) {
                 var file = temp[i];
-                const p = document.createElement("a");
-                p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                p.textContent = file.name;
-                document.querySelector('#content').appendChild(p);
-                var br = document.createElement("br");
-                document.querySelector('#content').appendChild(br);
+                // const p = document.createElement("a");
+                // p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                // p.textContent = file.name;
+                // document.querySelector('#content').appendChild(p);
+                // var br = document.createElement("br");
+                // document.querySelector('#content').appendChild(br);
 
                 const source = document.createElement("source");
                 source.src = 'https://docs.google.com/uc?export=download&id='+ file.id;
