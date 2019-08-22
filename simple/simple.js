@@ -113,7 +113,51 @@ function listFiles() {
                     const source = document.createElement("source");
                     source.src = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     source.setAttribute('data-track-number', '1');
+                    // var test = document.getElementsByTagName("audio");
+                    // test.appendChild(source);
                     document.querySelector('#audio').appendChild(source);
+
+
+                    const playListRow = document.createElement("div");
+                    playListRow.setAttribute('class', 'play-list-row');
+                    playListRow.setAttribute('data-track-row', i+1);
+
+                    const smallToggleButton = document.createElement("div");
+                    smallToggleButton.setAttribute('class', 'small-toggle-btn');
+
+                    const smallPlayButton = document.createElement("i");
+                    smallPlayButton.setAttribute('class', 'small-play-btn');
+
+                    const screenReaderText = document.createElement("span");
+                    screenReaderText.setAttribute('class', 'screen-reader-text');
+                    screenReaderText.textContent = 'Small toggle button';
+
+                    const trackNumber = document.createElement("div");
+                    trackNumber.setAttribute('class', 'track-number');
+                    trackNumber.textContent = i+1+'.';
+
+                    const trackTitle = document.createElement("div");
+                    trackNumber.setAttribute('class', 'track-title');
+
+                    const playListTrack = document.createElement("a");
+                    playListTrack.setAttribute('class', 'playlist-track');
+                    playListTrack.href = '#';
+                    playListTrack.setAttribute('data-play-track', i+1);
+                    playListTrack.textContent = file.name;
+
+
+                    document.querySelector('.play-list').appendChild(playListRow);
+
+                    document.querySelector('.play-list-row').appendChild(smallToggleButton);
+                    document.querySelector('.play-list-row').appendChild(trackNumber);
+                    document.querySelector('.play-list-row').appendChild(trackTitle);
+
+                    document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
+                    document.querySelector('.small-play-btn').appendChild(screenReaderText);
+                    document.querySelector('.track-title').appendChild(playListTrack);
+
+
+
 
                 }
             }
