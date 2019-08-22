@@ -1,81 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Drive API Quickstart</title>
-    <meta charset="UTF-8">
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="scripts.js" defer></script>
-    <link rel="stylesheet" href="playerlook.css">
+    <meta charset="utf-8" />
+    <meta name="author" content="Script Tutorials" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>HTML5 Audio player with playlist | Script Tutorials</title>
 
+    <!-- add styles and scripts -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!--    <script src="fileslist.js" defer></script>-->
+    <!--    <script src="scripts.js" defer></script>-->
+    <meta name="google-signin-client_id" content="660276360583-8s7r9b170mlrhr93cnka2ea1e14nk3al.apps.googleusercontent.com">
 </head>
 <body>
-<p>Drive API Quickstart</p>
-
-<!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize_button" style="display: none;">Authorize</button>
-<button id="signout_button" style="display: none;">Sign Out</button>
-
-<pre id="content" style="white-space: pre-wrap;"></pre>
-
-<a href="player.html">PLAYER</a>
-
-
-<script async defer src="https://apis.google.com/js/api.js"
-        onload="this.onload=function(){};handleClientLoad()"
-        onreadystatechange="if (this.readyState === 'complete') this.onload()">
-</script>
+    <header>
+<!--        <h2>Back to '<a href="http://www.script-tutorials.com/html5-audio-player-with-playlist/">HTML5 Audio player with playlist</a>' tutorial</h2>-->
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </header>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
 
 
-<div id="app-cover">
-    <div id="bg-artwork"></div>
-    <div id="bg-layer"></div>
-    <div id="player">
-        <div id="player-track">
-            <div id="album-name"></div>
-            <div id="track-name"></div>
-            <div id="track-time">
-                <div id="current-time"></div>
-                <div id="track-length"></div>
+    <div class="example">
+
+        <div class="player">
+            <div class="pl"></div>
+            <div class="title"></div>
+            <div class="artist"></div>
+            <div class="cover"></div>
+            <div class="controls">
+                <div class="play"></div>
+                <div class="pause"></div>
+                <div class="rew"></div>
+                <div class="fwd"></div>
             </div>
-            <div id="s-area">
-                <div id="ins-time"></div>
-                <div id="s-hover"></div>
-                <div id="seek-bar"></div>
-            </div>
+            <div class="volume"></div>
+            <div class="tracker"></div>
         </div>
-        <div id="player-content">
-            <div id="album-art">
-                <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg" class="active" id="_1">
-                <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
-                <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_3.jpg" id="_3">
-                <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_4.jpg" id="_4">
-                <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_5.jpg" id="_5">
-                <div id="buffer-box">Buffering ...</div>
-            </div>
-            <div id="player-controls">
-                <div class="control">
-                    <div class="button" id="play-previous">
-                        <i class="fas fa-backward"></i>
-                    </div>
-                </div>
-                <div class="control">
-                    <div class="button" id="play-pause-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="control">
-                    <div class="button" id="play-next">
-                        <i class="fas fa-forward"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ul class="playlist hidden">
+<!--            <li audiourl="01.mp3" cover="cover1.jpg" artist="Artist 1">01.mp3</li>-->
+<!--            <li audiourl="02.mp3" cover="cover2.jpg" artist="Artist 2">02.mp3</li>-->
+<!--            <li audiourl="03.mp3" cover="cover3.jpg" artist="Artist 3">03.mp3</li>-->
+<!--            <li audiourl="04.mp3" cover="cover4.jpg" artist="Artist 4">04.mp3</li>-->
+<!--            <li audiourl="05.mp3" cover="cover5.jpg" artist="Artist 5">05.mp3</li>-->
+<!--            <li audiourl="06.mp3" cover="cover6.jpg" artist="Artist 6">06.mp3</li>-->
+<!--            <li audiourl="07.mp3" cover="cover7.jpg" artist="Artist 7">07.mp3</li>-->
+        </ul>
+
     </div>
-</div>
+
+<!--    <button id="authorize_button" style="display: none;">Authorize</button>-->
+<!--    <button id="signout_button" style="display: none;">Sign Out</button>-->
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <script type="text/javascript">
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = '660276360583-8s7r9b170mlrhr93cnka2ea1e14nk3al.apps.googleusercontent.com';
+        var API_KEY = 'AIzaSyB23haIBOyfvbZgafkm4jNZMhql-Wr2-QE';
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+
+        var authorizeButton = document.getElementById('authorize_button');
+        var signoutButton = document.getElementById('signout_button');
+
+        /**
+         *  On load, called to load the auth2 library and API client library.
+         */
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        /**
+         *  Initializes the API client library and sets up sign-in state
+         *  listeners.
+         */
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                authorizeButton.onclick = handleAuthClick;
+                signoutButton.onclick = handleSignoutClick;
+            }, function(error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        }
+
+        /**
+         *  Called when the signed in status changes, to update the UI
+         *  appropriately. After a sign-in, the API is called.
+         */
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+                listFiles();
+            } else {
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+            }
+        }
+
+        /**
+         *  Sign in the user upon button click.
+         */
+        function handleAuthClick(event) {
+            gapi.auth2.getAuthInstance().signIn();
+        }
+
+        /**
+         *  Sign out the user upon button click.
+         */
+        function handleSignoutClick(event) {
+            gapi.auth2.getAuthInstance().signOut();
+        }
 
 
+    </script>
 
+    <script async defer src="https://apis.google.com/js/api.js"
+            onload="this.onload=function(){};handleClientLoad()"
+            onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
 
 </body>
 </html>
