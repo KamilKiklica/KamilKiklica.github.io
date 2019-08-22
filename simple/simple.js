@@ -88,7 +88,7 @@ function appendPre(message) {
 /**
  * Print filess.
  */
-
+var songsList = [];
 
 function listFiles() {
     gapi.client.drive.files.list({
@@ -97,11 +97,19 @@ function listFiles() {
     }).then(function(response) {
         appendPre('Files:');
         var files = response.result.files;
+        var temp = [];
         if (files && files.length > 0) {
             for (var i = 0; i < files.length; i++) {
-                var file = files[i];
+                var filee = files[i];
                 var regex = new RegExp("\\w*.mp3$");
-                if (regex.test(file.name)) {
+                if (regex.test(filee.name)) {
+                    temp.push(filee);
+                }
+            }
+                for (var i = 0; i < temp.length; i++) {
+                var file = temp[i];
+                // var regex = new RegExp("\\w*.mp3$");
+                // if (regex.test(file.name)) {
                     // appendPre(file.name + ' (' + file.id + ')');
                     const p = document.createElement("a");
                     p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
@@ -122,51 +130,144 @@ function listFiles() {
                     playListRow.setAttribute('class', 'play-list-row');
                     playListRow.setAttribute('data-track-row', i+1);
 
-                    const smallToggleButton = document.createElement("div");
-                    smallToggleButton.setAttribute('class', 'small-toggle-btn');
+                    // const smallToggleButton = document.createElement("div");
+                    // smallToggleButton.setAttribute('class', 'small-toggle-btn');
+                    //
+                    // const smallPlayButton = document.createElement("i");
+                    // smallPlayButton.setAttribute('class', 'small-play-btn');
+                    //
+                    // const screenReaderText = document.createElement("span");
+                    // screenReaderText.setAttribute('class', 'screen-reader-text');
+                    // screenReaderText.textContent = 'Small toggle button';
+                    //
+                    // const trackNumber = document.createElement("div");
+                    // trackNumber.setAttribute('class', 'track-number');
+                    // trackNumber.textContent = i+1+'.';
+                    //
+                    // const trackTitle = document.createElement("div");
+                    // trackTitle.setAttribute('class', 'track-title');
+                    //
+                    // const playListTrack = document.createElement("a");
+                    // playListTrack.setAttribute('class', 'playlist-track');
+                    // playListTrack.href = '#';
+                    // playListTrack.setAttribute('data-play-track', i.toString());
+                    // playListTrack.textContent = file.name;
 
-                    const smallPlayButton = document.createElement("i");
-                    smallPlayButton.setAttribute('class', 'small-play-btn');
-
-                    const screenReaderText = document.createElement("span");
-                    screenReaderText.setAttribute('class', 'screen-reader-text');
-                    screenReaderText.textContent = 'Small toggle button';
-
-                    const trackNumber = document.createElement("div");
-                    trackNumber.setAttribute('class', 'track-number');
-                    trackNumber.textContent = i+1+'.';
-
-                    const trackTitle = document.createElement("div");
-                    trackNumber.setAttribute('class', 'track-title');
-
-                    const playListTrack = document.createElement("a");
-                    playListTrack.setAttribute('class', 'playlist-track');
-                    playListTrack.href = '#';
-                    playListTrack.setAttribute('data-play-track', i+1);
-                    playListTrack.textContent = file.name;
-
-
+                // debugger;
                     document.querySelector('.play-list').appendChild(playListRow);
 
-                    document.querySelector('.play-list-row').appendChild(smallToggleButton);
-                    document.querySelector('.play-list-row').appendChild(trackNumber);
-                    document.querySelector('.play-list-row').appendChild(trackTitle);
-
-                    document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
-                    document.querySelector('.small-play-btn').appendChild(screenReaderText);
-                    document.querySelector('.track-title').appendChild(playListTrack);
 
 
+                    // document.querySelector('.play-list').appendChild(playListRow);
+                    //
+                    // document.querySelector('.play-list-row').appendChild(smallToggleButton);
+                    //
+                    // document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
+                    // document.querySelector('.small-play-btn').appendChild(screenReaderText);
+                    //
+                    // document.querySelector('.play-list-row').appendChild(trackNumber);
+                    // document.querySelector('.play-list-row').appendChild(trackTitle);
+                    // document.querySelector('.track-title').appendChild(playListTrack);
+                    songsList.push('https://docs.google.com/uc?export=download&id='+ file.id);
 
 
-                }
+                // }
             }
+            console.log(songsList);
+
+
+
+
+
+
+            const smallToggleButton = document.createElement("div");
+            smallToggleButton.setAttribute('class', 'small-toggle-btn');
+
+            const smallPlayButton = document.createElement("i");
+            smallPlayButton.setAttribute('class', 'small-play-btn');
+
+            const screenReaderText = document.createElement("span");
+            screenReaderText.setAttribute('class', 'screen-reader-text');
+            screenReaderText.textContent = 'Small toggle button';
+
+            const trackNumber = document.createElement("div");
+            trackNumber.setAttribute('class', 'track-number');
+// trackNumber.textContent = i+1+'.';
+
+            const trackTitle = document.createElement("div");
+            trackTitle.setAttribute('class', 'track-title');
+
+// const playListTrack = document.createElement("a");
+// playListTrack.setAttribute('class', 'playlist-track');
+// playListTrack.href = '#';
+// playListTrack.setAttribute('data-play-track', i.toString());
+// playListTrack.textContent = file.name;
+
+
+            // const parentObject = document.getElementsByClassName('play-list-row');
+
+const parentObject = document.querySelectorAll('.play-list-row');
+
+let nodeItem;
+for (let i = 0; i < parentObject.length; i++) {
+    nodeItem = parentObject.item(i);
+    let number = i+1;
+    nodeItem.innerHTML = `<div class="small-toggle-btn">
+                <i class="small-play-btn">
+                    <span class="screen-reader-text">Small toggle button</span>
+                </i>
+            </div>
+            <div class="track-number">
+                `+number+`.
+            </div>
+            <div class="track-title">
+                <a class="playlist-track" href="#" data-play-track=`+i+1+`>`+temp[i].name+`</a>
+            </div>`;
+}
+
+
+
+            // document.querySelector('.play-list-row').appendChild(smallToggleButton);
+            //
+            // document.querySelector('.small-toggle-btn').appendChild(smallPlayButton);
+            // document.querySelector('.small-play-btn').appendChild(screenReaderText);
+            //
+            // document.querySelector('.play-list-row').appendChild(trackNumber);
+            // document.querySelector('.play-list-row').appendChild(trackTitle);
+
+
+
+
+//
+// parentObject.forEach((parent, i) => {
+//     const childElement1 = document.createElement('.small-toggle-btn');
+//     const childElement2 = document.createElement('track-number');
+//     const childElement3 = document.createElement('track-title');
+//     childElement1.className = 'second';
+//     childElement1.innerHTML = `second ${i}`;
+//     parent.appendChild(childElement1);
+//     parent.appendChild(childElement2);
+//     parent.appendChild(childElement3)
+// });
+
+
+
+
+
+
+
+
+
+
+
+
         } else {
             appendPre('No files found.');
         }
     });
 
 }
+
 
 
 
