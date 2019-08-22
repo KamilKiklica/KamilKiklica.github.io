@@ -147,6 +147,45 @@ function appendPre(message) {
  * Print filess.
  */
 
+// var trackList = [];
+// var namesList = [];
+// var artWorkList = [];
+// function listFiles() {
+//     gapi.client.drive.files.list({
+//         'pageSize': 100,
+//         'fields': "nextPageToken, files(id, name)"
+//     }).then(function(response) {
+//         appendPre('Files:');
+//         var files = response.result.files;
+//         if (files && files.length > 0) {
+//             for (var i = 0; i < files.length; i++) {
+//                 var file = files[i];
+//                 var regex = new RegExp("\\w*.mp3$");
+//                 if (regex.test(file.name)) {
+//                     // appendPre(file.name + ' (' + file.id + ')');
+//                     const p = document.createElement("li");
+//                     p.audiourl = 'https://docs.google.com/uc?export=download&id='+ file.id;
+//                     p.cover = "cover1.jpg";
+//                     p.artist = file.name;
+//                     // p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
+//                     p.textContent = file.name;
+//                     document.querySelector('#content').appendChild(p);
+//                     // var br = document.createElement("br");
+//                     // document.querySelector('.playlist hidden').appendChild(br);
+//                     // var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
+//                     // trackList.push(link);
+//                     // namesList.push(file.name);
+//                     // artWorkList.push('_1');
+//                 }
+//             }
+//         } else {
+//             appendPre('No files found.');
+//         }
+//     });
+//
+// }
+
+
 var trackList = [];
 var namesList = [];
 var artWorkList = [];
@@ -163,19 +202,16 @@ function listFiles() {
                 var regex = new RegExp("\\w*.mp3$");
                 if (regex.test(file.name)) {
                     // appendPre(file.name + ' (' + file.id + ')');
-                    const p = document.createElement("li");
-                    p.audiourl = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    p.cover = "cover1.jpg";
-                    p.artist = file.name;
-                    // p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                    const p = document.createElement("a");
+                    p.href = 'https://docs.google.com/uc?export=download&id='+ file.id;
                     p.textContent = file.name;
-                    document.querySelector('.playlist hidden').appendChild(p);
-                    // var br = document.createElement("br");
-                    // document.querySelector('.playlist hidden').appendChild(br);
-                    // var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
-                    // trackList.push(link);
-                    // namesList.push(file.name);
-                    // artWorkList.push('_1');
+                    document.querySelector('#content').appendChild(p);
+                    var br = document.createElement("br");
+                    document.querySelector('#content').appendChild(br);
+                    var link = 'https://docs.google.com/uc?export=download&id='+ file.id;
+                    trackList.push(link);
+                    namesList.push(file.name);
+                    artWorkList.push('_1');
                 }
             }
         } else {
